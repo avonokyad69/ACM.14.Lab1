@@ -2,21 +2,18 @@
 
 use strict;
 use st01::st01;
+use st02::st02;
 
 my @MODULES = 
 (
 	\&ST01::st01,
-	\&ST01::st01,
-	\&ST01::st01,
-	\&ST01::st01,
+	\&ST02::st02,
 );
 
 my @NAMES = 
 (
 	"Student 01",
 	"Student 02",
-	"Student 03",
-	"Student 04",
 );
 
 sub menu
