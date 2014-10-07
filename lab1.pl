@@ -3,22 +3,20 @@
 use strict;
 use st01::st01;
 use st02::st02;
-use st03::st03;
-#так надо? что-то пока не очень понятно
-#просто проверяю
+use st13::st13;
 
 my @MODULES = 
 (
 	\&ST01::st01,
 	\&ST02::st02,
-	\&ST03::st03,
+	\&ST13::st13,
 );
 
 my @NAMES = 
 (
 	"Student 01",
 	"Student 02",
-	"Student 03",
+	"Mansurov Alexander",
 );
 
 sub menu
