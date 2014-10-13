@@ -1,6 +1,12 @@
 #!/usr/bin/perl
 
 use strict;
+use st13::st13;
+
+my @MODULES = 
+(
+	\&ST13::st13,
+);
 
 my @NAMES = 
 (
@@ -22,7 +28,3 @@ sub menu
 	my $ch = <STDIN>;
 	return ($ch-1);
 }
-
-print "Hello World!\n";
-
-print "\n";
