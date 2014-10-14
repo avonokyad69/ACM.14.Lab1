@@ -3,17 +3,20 @@
 use strict;
 use st01::st01;
 use st02::st02;
+use st08::st08;
 
 my @MODULES = 
 (
 	\&ST01::st01,
 	\&ST02::st02,
+	\&ST08::st08,
 );
 
 my @NAMES = 
 (
 	"Student 01",
 	"Student 02",
+	"08. kuzznetsovva",
 );
 
 sub menu
