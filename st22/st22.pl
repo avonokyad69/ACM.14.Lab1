@@ -1,6 +1,8 @@
+package ST22;
 use strict;
-my %myRoomItems;#undef();
-mainfunc();
+my %myRoomItems;
+
+menu();
 
 
 sub addItem
@@ -16,11 +18,10 @@ sub addItem
 sub deleteItem
 {
 	print "deleteItem\n";
-	#запросить имя атрибута
 	print "Please write Name of item to delete\n";
 	chomp(my $name = <STDIN>);
 	if(exists($myRoomItems{$name}))
-	{	#удалить элемент
+	{	
 		delete($myRoomItems{$name});
 	}
 	else
@@ -69,7 +70,7 @@ sub saveToFile
 	print "saveToFile\n";
 	my %buffHash;
 	dbmopen(%buffHash,"ShishkinaDB",0644) || die "Error open to file!";
-	%buffHash = undef(); # очищаем фаил перед записью
+	%buffHash = undef(); 
 	my $bufStr = undef();
 	while((my $name,my $item) = each %myRoomItems)
 	{
@@ -78,7 +79,6 @@ sub saveToFile
 		{
 			$bufStr = $bufStr.$itemKey.":=".${$myRoomItems{$name}}{$itemKey}.";";
 		};		
-		#print $bufStr."\n";
 		$buffHash{$name} = $bufStr;
 	};
 	dbmclose(%buffHash);
@@ -91,14 +91,13 @@ sub loadFromFile
 	my $bufStr;
 	dbmopen(%buffHash,"ShishkinaDB",0644) || die "Error open to file!";
 
-	while((my $name,my $item) = each %buffHash)#проходим по элементам хэша со строками
+	while((my $name,my $item) = each %buffHash)
 	{
 		my @buf12 = undef();
-		@buf12 = split(/;/, $buffHash{$name}); # разделяем строку на элементы
+		@buf12 = split(/;/, $buffHash{$name}); 
 		foreach my $bufItem (@buf12)
 		{
-			my @hashArr = split(/:=/, $bufItem); # разделяем элемент на атрибуты
-			#print "hashArr: ".@hashArr[0]." ".@hashArr[1].""."\n";
+			my @hashArr = split(/:=/, $bufItem); 
 			$myRoomItems{$name} = {color=> @hashArr[0], details=> @hashArr[1]};
 		};
 	};
@@ -106,7 +105,7 @@ sub loadFromFile
 };
 
 
-sub mainfunc
+sub menu
 {
 	my @arr = (\&addItem, \&deleteItem, \&updateItem, \&showAllItems, \&saveToFile, \&loadFromFile);
 	my $in;
