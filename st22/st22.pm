@@ -2,7 +2,6 @@ package ST22;
 use strict;
 my %myRoomItems;
 
-menu();
 
 
 sub addItem
@@ -105,7 +104,7 @@ sub loadFromFile
 };
 
 
-sub menu
+sub st22
 {
 	my @arr = (\&addItem, \&deleteItem, \&updateItem, \&showAllItems, \&saveToFile, \&loadFromFile);
 	my $in;
