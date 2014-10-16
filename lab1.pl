@@ -11,7 +11,7 @@ my @MODULES =
 	\&ST01::st01,
 	\&ST02::st02,
 	\&ST08::st08,
-	\&ST08::st22,
+	\&ST22::st22,
 );
 
 my @NAMES = 
