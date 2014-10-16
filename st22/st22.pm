@@ -108,9 +108,12 @@ sub st22
 {
 	my @arr = (\&addItem, \&deleteItem, \&updateItem, \&showAllItems, \&saveToFile, \&loadFromFile);
 	my $in;
-	print "\nMake your choice:\n 0 - add item\n 1 - delete item\n 2 - update item\n 3 - show all items\n 4 - save to file\n 5 - load from file\n 9 - exit\n";
-	chomp($in = <STDIN>);
-	last if ($in eq 9);
-    $arr[$in]->();	
+	while(1)
+	{
+		print "\nMake your choice:\n 0 - add item\n 1 - delete item\n 2 - update item\n 3 - show all items\n 4 - save to file\n 5 - load from file\n 9 - exit\n";
+		chomp($in = <STDIN>);
+		last if ($in eq 9);
+        $arr[$in]->();
+	};
 
 };
