@@ -108,6 +108,8 @@ sub menu
  }
  
  
+sub st08
+{
  
 while(1)
 {
@@ -118,9 +120,10 @@ while(1)
 	}
 	else
 	{
-		exit();
+		return;
 	}
 }
 
+}
 
 return 1;
