@@ -148,6 +148,7 @@ sub DoLoad
 	print "\nloading...\n";
 	my %hash=();
 	dbmopen(%hash, "mansurov_data",0666) || die ("error open");
+	@films=();
 	foreach my $key(sort keys %hash) {
 		my @temp1 = split(/end/,$hash{$key});
 		foreach(@temp1){
