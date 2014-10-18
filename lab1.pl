@@ -4,6 +4,7 @@ use strict;
 use st01::st01;
 use st02::st02;
 use st08::st08;
+use st15::st15;
 use st22::st22;
 
 my @MODULES = 
@@ -11,6 +12,7 @@ my @MODULES =
 	\&ST01::st01,
 	\&ST02::st02,
 	\&ST08::st08,
+	\&ST15::st15,
 	\&ST22::st22,
 );
 
@@ -19,7 +21,8 @@ my @NAMES =
 	"Student 01",
 	"Student 02",
 	"08. kuzznetsovva",
-	"22.ShishkinaViktoria"
+	"15. Pridachin",
+	"22. ShishkinaViktoria"
 );
 
 sub menu
