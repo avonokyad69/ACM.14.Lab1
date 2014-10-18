@@ -7,10 +7,6 @@ use st08::st08;
 use st15::st15;
 use st22::st22;
 
-# Если для своей работы создаете отдельный форк, не забывайте его синхронизировать перед отправкой:
-# https://help.github.com/articles/syncing-a-fork/
-#
-
 my @MODULES = 
 (
 	\&ST01::st01,
