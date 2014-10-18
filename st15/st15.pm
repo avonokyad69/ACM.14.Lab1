@@ -146,9 +146,13 @@ sub st15
 		foreach (@MenuItems){
 			print "$_\n";
 		}
-		$ch = <STDIN>;
-		last if ($ch-1 eq 7);
-		$ReferencesToMenuItems[$ch-1]->();		
+		chomp ($ch = <STDIN>);
+		if($ch>=1 && $ch<=6){
+			$ReferencesToMenuItems[$ch-1]->();	
+		}
+		else{
+			last if ($ch eq 7);	
+		}	
 	}
 };
 
