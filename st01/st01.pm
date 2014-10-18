@@ -135,6 +135,9 @@ sub fromfile
 	dbmclose(%hash);
 }
 
+sub st01
+{
+
 while(1)
 {
 	my $ch = menu();
@@ -148,3 +151,7 @@ while(1)
 		exit();
 	}
 }
+
+}
+
+1;
