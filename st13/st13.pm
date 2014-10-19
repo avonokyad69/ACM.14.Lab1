@@ -176,6 +176,6 @@ sub DoExit
 {
 	print "\nbye bye\n\n";
 	exit();
-}
+};
 
 return 1;
