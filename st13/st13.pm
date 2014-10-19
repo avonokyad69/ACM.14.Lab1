@@ -178,5 +178,4 @@ sub DoExit
 	exit();
 }
 
-
 return 1;
