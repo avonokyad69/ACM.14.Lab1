@@ -16,7 +16,7 @@ my @NAMES =
 (
 	"Student 01",
 	"Student 02",
-	"Mansurov Alexander",
+	"13. Mansurov Alexander",
 );
 
 sub menu
