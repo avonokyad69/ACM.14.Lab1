@@ -10,6 +10,7 @@ my @MENULINK =
 	\&DoSave,
 	\&DoLoad,
 	\&DoDelete,
+	\&DoExit,
 );
 
 my @MENU = 
@@ -20,11 +21,24 @@ my @MENU =
 	"save",
 	"load",
 	"delete",
+	"exit",
 );
 
 sub st13
 {
-	print "Mansurov Alexander Lab1\n";
+	print "Welcome to my own version of IMDB :]";
+	while(1)
+	{
+		my $ch = menu();
+		if(defined $MENULINK[$ch])
+		{	
+			$MENULINK[$ch]->();		
+		}
+		else
+		{
+			exit();
+		}
+	}
 };
 
 my @films = ();	
@@ -45,7 +59,7 @@ sub menu
 
 sub DoAdd
 {
-	print "enter the name of the movie: ";
+	print "\nenter the name of the movie: ";
 	chomp(my $name=<STDIN>);
 	print "enter the producer of the movie: ";
 	chomp(my $producer=<STDIN>);
@@ -70,18 +84,18 @@ sub DoAdd
 sub DoEdit
 {
 	if (DoShow()) {
-		print "choose film #id to edit: \n";
+		print "\nchoose film #id to edit: \n";
 		chomp(my $el=<STDIN>);
 		if (@films[$el]) {
 			my $hashref = @films[$el];
-			foreach my $key(keys $hashref){
-				print "$key\n";
+			foreach my $key(sort keys $hashref){
+				print "$key: ";
 				chomp(my $hash=<STDIN>);
 				$hashref->{$key}=$hash;
 			}
-			print "\n film #$el edited\n";
+			print "\nfilm #$el edited\n";
 		} else {
-			print "wrong id";
+			print "\nwrong id\n";
 		}
 	}
 };
@@ -146,16 +160,23 @@ sub DoLoad
 sub DoDelete
 {
 	if (DoShow()) {
-		print "choose film #id to delete: ";
+		print "\nchoose film #id to delete: ";
 		chomp (my $el=<STDIN>);
 		if (@films[$el]) {
 			splice(@films, $el, 1);
-			print "\nfilm #".$el." deleted!\n";
+			print "\nfilm #".$el." deleted\n";
 			return 1;
 		} else {
 			print "\nwrong id\n";
 		}	
 	}
 };
+
+sub DoExit
+{
+	print "\nbye bye\n\n";
+	exit();
+}
+
 
 return 1;
