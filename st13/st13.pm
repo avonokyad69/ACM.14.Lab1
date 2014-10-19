@@ -47,18 +47,18 @@ sub DoAdd
 {
 	print "enter the name of the movie: ";
 	chomp(my $name=<STDIN>);
-	print "enter the name of the director: ";
-	chomp(my $director=<STDIN>);
-	print "enter the year of the movie: ";
-	chomp(my $year=<STDIN>);
+	print "enter the producer of the movie: ";
+	chomp(my $producer=<STDIN>);
 	print "enter your score (max = 10) to this movie: ";
 	chomp(my $score=<STDIN>);
+	print "enter the year of the movie: ";
+	chomp(my $year=<STDIN>);
 	
 	my $film = {
-		Name => $name,
-		Director => $director,
-		Year => $year,
-		Score => $score,
+		name => $name,
+		producer => $producer,
+		score => $score,
+		year => $year,
 	};
 	
 	push(@films,$film);
@@ -73,31 +73,20 @@ sub DoEdit
 		print "choose film #id to edit: \n";
 		chomp(my $el=<STDIN>);
 		if (@films[$el]) {
-			print "enter the name of the movie: ";
-			chomp(my $name=<STDIN>);
-			print "enter the name of the director: ";
-			chomp(my $director=<STDIN>);
-			print "enter the year of the movie: ";
-			chomp(my $year=<STDIN>);
-			print "enter your score (max = 10) to this movie: ";
-			chomp(my $score=<STDIN>);
-	
-			my $film = {
-				Name => $name,
-				Director => $director,
-				Year => $year,
-				Score => $score,
-			};
-	
-			@films[$el] = $film;
-	
-			print "\nfilm #".$el." edited\n";
-			return 1;
+			my $hashref = @films[$el];
+			foreach my $key(keys $hashref){
+				print "$key\n";
+				chomp(my $hash=<STDIN>);
+				$hashref->{$key}=$hash;
+			}
+			print "\n film #$el edited\n";
 		} else {
-			print "\nwrong id\n";
+			print "wrong id";
 		}
 	}
 };
+
+
 
 sub DoShow
 {
@@ -106,14 +95,12 @@ sub DoShow
 		my $i = 0;
 		foreach my $f(@films)
 		{
-			print "\n:::::::::  film #$i  :::::::::  \n".
-			"name:     $f->{Name}\n".
-			"director: $f->{Director}\n".
-			"year:     $f->{Year}\n".
-			"score:    $f->{Score}\n";
+			print "\n:::::::::  film #$i  :::::::::  \n";
+			foreach my $key (sort keys $f) {
+				print "$key: $f->{$key}\n";
+			}
 			$i++;
 		}
-		print "\n";
 		return 1;
 	} else {
 		print "\nthere is no films in your lib\n";
@@ -124,14 +111,16 @@ sub DoShow
 sub DoSave
 {
 	print "\nsaving...\n";
-	my %hash = ();
-	dbmopen(%hash, "mansurov_data",0666) || die ("error open");
+	dbmopen(my %hash, "mansurov_data",0666) || die ("error open");
+	%hash = ();
 	my $i = 0;
-	my @temp = ();
+	my @temp;
 	if (@films) {
 		foreach my $f(@films) {
-			@temp = ($f->{Name},$f->{Director},$f->{Year},$f->{Score},"end");
-			chomp(@temp);
+			foreach my $key (sort keys $f) {
+				push(@temp,$key);
+				push(@temp,$f->{$key});
+			}
 			$hash{$i}=join(",",@temp);
 			$i++;
 		}
@@ -139,32 +128,19 @@ sub DoSave
 	} else {
 		print "there is no films in your lib\n";
 	}
-	
 	dbmclose(%hash)
 };
 
 sub DoLoad
 {
 	print "\nloading...\n";
-	my %hash=();
-	dbmopen(%hash, "mansurov_data",0666) || die ("error open");
-	@films=();
-	foreach my $key(sort keys %hash) {
-		my @temp1 = split(/end/,$hash{$key});
-		foreach(@temp1){
-			my @temp2 = split(/,/,$_);
-			my $film = {
-				Name => @temp2[0],
-				Director => @temp2[1],
-				Year => @temp2[2],
-				Score => @temp2[3],
-			};
-			push(@films, $film);
-		}
+	dbmopen(my %hash, "mansurov_data",0666) || die ("error open");
+	while ((my $key, my $value) = each(%hash)) {
+		my @film = split(/,/,$hash{$key});
+		$films[$key]={@film};
 	}
+	dbmclose(%hash);	
 	print "file loaded\n";
-	dbmclose(%hash);
-	return 1;
 };
 
 sub DoDelete
@@ -181,18 +157,5 @@ sub DoDelete
 		}	
 	}
 };
-
-while(1)
-{
-	my $ch = menu();
-	if(defined $MENULINK[$ch])
-	{	
-		$MENULINK[$ch]->();		
-	}
-	else
-	{
-		exit();
-	}
-}
 
 return 1;
