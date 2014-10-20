@@ -1,6 +1,6 @@
 package ST08;
 use strict;
-
+use warnings;
 my @OPTIONS = 
 (
 	"Add",
@@ -74,7 +74,7 @@ sub menu
 	Age => $tmp3,
 	Sth => $tmp4,
 	};
-	@humans[$id]=$human;
+	$humans[$id]=$human;
 	return 1;
  }
  sub delete
@@ -97,12 +97,37 @@ sub menu
  }
  sub tofile
  {
-	
+	my %filehash=();
+	dbmopen(%filehash, "file", 0644);
+	my $id=0;
+	foreach my $i(@humans)
+	{	
+		$filehash{$id}=$i->{Name}.$i->{SurName}.$i->{Age}.$i->{Sth};
+		$id++;
+	}
+	dbmclose(%filehash);
 	return 1;
  }
  sub fromfile
  {
+	my %filehash;
+	dbmopen(%filehash, "file", 0644);
+	@humans=();
+	my $id=0;
+	foreach my $i(values %filehash)
+	{
+		my @tmp = split /\n/, $i;
+		my $human={
+		Name => "$tmp[0]\n",
+		SurName => "$tmp[1]\n",
+		Age => "$tmp[2]\n",
+		Sth => "$tmp[3]\n",
+		};
+		$humans[$id]=$human;
+		$id++;
+	}
 	
+	dbmclose(%filehash);
 	return 1;
 
  }
