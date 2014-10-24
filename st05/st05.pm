@@ -1,3 +1,5 @@
+package ST05;
+
 use strict;
 
 main ();
