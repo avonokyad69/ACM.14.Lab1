@@ -2,23 +2,23 @@ package ST21;
 use 5.010;
 use strict;
 use warnings;
-use Tie::IxHash;
+#use Tie::IxHash;
 
 my $choice;
 
 my %list =();
-tie %list, "Tie::IxHash";
-%list = (
-	1 => 'Add',
-	2 => 'Edit',
-	3 => 'Delete',
-	4 => 'Show_all',
-	5 => 'Save_to_file',
-	6 => 'Load_from_file',
-	7 => 'Exit');
-	
+#tie %list, "Tie::IxHash";
+#%list = (
+#	1 => 'Add',
+#	2 => 'Edit',
+#	3 => 'Delete',
+#	4 => 'Show_all',
+#	5 => 'Save_to_file',
+#	6 => 'Load_from_file',
+#	7 => 'Exit');
+#	
 my %Items =();
-tie %Items, "Tie::IxHash";
+#tie %Items, "Tie::IxHash";
 
 sub menu
 {
@@ -158,3 +158,5 @@ sub st21
 		$choice = menu();
 	}
 }
+
+1;
