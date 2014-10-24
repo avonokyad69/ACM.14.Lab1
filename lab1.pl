@@ -29,7 +29,7 @@ my @NAMES =
 	"01. Abramov",
 	"Student 02",
 	"08. kuzznetsovva",
-	"10. Kuklianov"
+	"10. Kuklianov",
 	"13. Mansurov",
 	"15. Pridachin",
 	"16. Samokhin",
