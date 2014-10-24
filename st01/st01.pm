@@ -148,7 +148,7 @@ while(1)
 	}
 	else
 	{
-		exit();
+		return;
 	}
 }
 
