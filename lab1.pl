@@ -4,6 +4,7 @@ use strict;
 use st01::st01;
 use st02::st02;
 use st08::st08;
+use st09::st09;
 use st10::st10;
 use st13::st13;
 use st12::st12;
@@ -17,6 +18,7 @@ my @MODULES =
 	\&ST01::st01,
 	\&ST02::st02,
 	\&ST08::st08,
+	\&ST09::st09,
 	\&ST10::st10,
 	\&ST12::st12,
 	\&ST13::st13,
@@ -31,6 +33,7 @@ my @NAMES =
 	"01. Abramov",
 	"Student 02",
 	"08. kuzznetsovva",
+	"09. Kuzmin",
 	"10. Kuklianov",
 	"12. Kushnikov V.",
 	"13. Mansurov",
