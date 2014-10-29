@@ -31,8 +31,8 @@ my @NAMES =
 	"01. Abramov",
 	"Student 02",
 	"08. kuzznetsovva",
+	"09. Kuzmin",
 	"10. Kuklianov",
-	"09. Kuzmin"
 	"13. Mansurov",
 	"15. Pridachin",
 	"16. Samokhin",
