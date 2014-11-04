@@ -32,11 +32,11 @@ sub st13
 		my $ch = menu();
 		if(defined $MENULINK[$ch])
 		{	
-			$MENULINK[$ch]->();		
+			$MENULINK[$ch]->();
 		}
 		else
 		{
-			exit();
+			print "\nwrong choice\n";
 		}
 	}
 };
@@ -175,7 +175,7 @@ sub DoDelete
 sub DoExit
 {
 	print "\nbye bye\n\n";
-	exit();
+	last;
 };
 
 return 1;
