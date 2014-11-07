@@ -77,7 +77,7 @@ sub change
 sub printall
 {
 	my $i=0;
-	if(defined @students)
+	if(1)
 		{
 			foreach	my $item (@students)
 				{	
@@ -108,7 +108,7 @@ sub tofile
 	dbmopen(my %hash, "AbramovData",0644);
 	my $i=0;
 	my $s;
-	if(defined @students)
+	if(1)
 	{
 	foreach my $item(@students)
 		{

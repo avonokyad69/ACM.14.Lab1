@@ -11,7 +11,7 @@ my @MODULES =(
 	\&show,
 	\&save,
 	\&load,
-	\&exit
+#	\&exit
 	);
 my @ElNames=(
 	'Название',
@@ -50,6 +50,7 @@ sub st12{
 			$MODULES[$ch]->();
 		}
 		else{
+			return;
 			system("cls");
 			print "Внимательнее!";
 			next;

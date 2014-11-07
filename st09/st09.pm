@@ -10,7 +10,7 @@ my @MYMENU =
 	\&Save,
 	\&Load,
 	\&Delete,
-	\&Exit,
+#	\&Exit,
 );
 
 my @MENU =
@@ -36,7 +36,7 @@ sub st09
 		}
 		else
 		{
-			exit();
+			return;
 		}
 	}
 };

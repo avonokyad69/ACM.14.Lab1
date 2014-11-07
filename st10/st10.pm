@@ -10,7 +10,7 @@ my @ACTIONS =
 	\&list,
 	\&save,
 	\&load,
-	\&exit
+#	\&exit
 );
 
 my @NAMES = 
