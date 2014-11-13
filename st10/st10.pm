@@ -1,4 +1,28 @@
-package ObjectManager;
+package ST10;
+
+use strict;
+
+my @ACTIONS = 
+(
+	\&add,
+	\&edit,
+	\&remove,
+	\&list,
+	\&save,
+	\&load,
+#	\&exit
+);
+
+my @NAMES = 
+(
+	"Add object",
+	"Edit object",
+	"Remove object",
+	"List of objects",
+	"Save to file",
+	"Load from file",
+	"Exit",
+);
 
 my %objects;
 
@@ -20,15 +44,14 @@ sub add
     my @ids = get_ids();
     my $id = 0;
     
-    if(scalar @ids != 0)
-    {
+    if(scalar @ids != 0) {
         $id = $ids[scalar @ids - 1]; # scalar @ids возвращает длину массива
         $id++;
     }
     
     my %obj;
     $objects{$id} = {};
-    foreach $key (keys %attributes) {
+    foreach my $key (keys %attributes) {
         print $attributes{$key} . ": ";
         my $value = <STDIN>;
         $value = trim($value);
@@ -48,7 +71,7 @@ sub edit
         return;
     }
     
-    foreach $key (keys %attributes) {
+    foreach my $key (keys %attributes) {
         my $oldValue = $objects{$id}->{$key};
         print $attributes{$key} . " [$oldValue]: ";
         my $value = <STDIN>;
@@ -81,19 +104,16 @@ sub list
 {
     my @ids = get_ids();
     
-    if(scalar @ids > 0) 
-    {
+    if(scalar @ids > 0) {
         print "\n--------------------------------------------------\n";
     }
 
-    foreach $id (values @ids)
-    {
+    foreach my $id (values @ids) {
         my $obj = $objects{$id};
         print "ID: ";
         printf("%-46s|\n", $id + 1);
         
-        foreach $key (keys $obj)
-        {
+        foreach my $key (keys $obj) {
             printf "%-20s", $attributes{$key} . ':';
             printf "%-30s|", $obj->{$key};
             print "\n";
@@ -104,19 +124,14 @@ sub list
 
 sub save
 {
-
     my $defaultFile = 'data';
-
-    my $defaultFile = 'objects';
-
     print "Enter DB name [$defaultFile]: ";
     my $fileName = <STDIN>;
     $fileName = trim($fileName);
     if(length $fileName == 0) {
         $fileName = $defaultFile;
     }
-
-    $fileName = 'data/' . $fileName;
+    $fileName = 'st10/data/' . $fileName;
     
     if(-e $fileName . '.dir') {
         unlink($fileName . '.dir');
@@ -125,23 +140,16 @@ sub save
         unlink($fileName . '.pag');
     }
 
-    
-    # Запись в файл
-    use Fcntl;
-    use NDBM_File;
-
-
     my %hash;
     dbmopen(%hash, $fileName, 0666);
     
     my $template = '';
-    foreach $key (keys %attributes) {
+    foreach my $key (keys %attributes) {
         $template .= 'u i ';
     }
-    foreach $key (keys %objects)
-    {
+    foreach my $key (keys %objects) {
         my $code = 'pack("' . $template . '"';
-        foreach $attr (sort keys %attributes) {
+        foreach my $attr (sort keys %attributes) {
             my $c = '$objects{$key}->{' . $attr . '}, 1';
             $code .= ', ' . $c;
         }
@@ -160,43 +168,30 @@ sub save
 
 sub load
 {
-
     my $defaultFile = 'data';
-
-    my $defaultFile = 'objects';
-
     print "Enter DB name [$defaultFile]: ";
     my $fileName = <STDIN>;
     $fileName = trim($fileName);
     if(length $fileName == 0) {
         $fileName = $defaultFile;
     }
-
-    $fileName = 'data/' . $fileName;
+    $fileName = 'st10/data/' . $fileName;
     
     %objects = ();
     
-
-    
-    # Чтение из файла
-    use Fcntl;
-    use NDBM_File;
-    use Data::Dumper;
-
-
     my %hash;
     dbmopen(%hash, $fileName, 0666);
     
     my $template = '';
-    foreach $key (keys %attributes) {
+    foreach my $key (keys %attributes) {
         $template .= 'u i ';
     }
     my @attr_keys = sort keys %attributes;
-    foreach $key (keys %hash) {
+    foreach my $key (keys %hash) {
         my @d = unpack($template, $hash{$key});
         $objects{$key} = {};
         my $i = 0;
-        foreach $k (keys @d) {
+        foreach my $k (keys @d) {
             if(($k % 2) != 0) {
                 next;
             }
@@ -213,8 +208,7 @@ sub load
 sub get_ids
 {
     my @ids;
-    foreach $id (keys %objects) 
-    {
+    foreach my $id (keys %objects) {
         push @ids, $id;
     }
     @ids = sort {$a<=>$b} @ids;
@@ -224,13 +218,46 @@ sub get_ids
 
 sub trim 
 {
-    my $s = shift; $s =~ s/^\s+|\s+$//g; 
+    my $s = shift; $s =~ s/\s+$//g; 
     return $s;
 }
-
-return 1;
 
 sub exit
 {
     exit;
 }
+
+sub menu
+{
+	my $i = 0;
+	print "\n------------------------------\n";
+	print "Menu:\n";
+	foreach my $s(@NAMES)
+	{
+		$i++;
+		print "$i. $s\n";
+	}
+	print "------------------------------\n";
+	print "Enter your number:\n";
+	my $ch = <STDIN>;
+	return ($ch-1);
+}
+
+sub st10
+{
+
+    fill();
+    list();
+    
+    while(1) {
+        my $ch = menu();
+	    if(defined $ACTIONS[$ch]) {
+		    print $NAMES[$ch]." launching...\n\n";
+		    $ACTIONS[$ch]->();
+	    } else {
+		    return;
+	    }
+    }
+}
+
+return 1;

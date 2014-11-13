@@ -1,13 +1,10 @@
 package ST21;
-use 5.010;
 use strict;
 use warnings;
-use Tie::IxHash;
 
 my $choice;
 
 my %list =();
-tie %list, "Tie::IxHash";
 %list = (
 	1 => 'Add',
 	2 => 'Edit',
@@ -18,13 +15,12 @@ tie %list, "Tie::IxHash";
 	7 => 'Exit');
 	
 my %Items =();
-tie %Items, "Tie::IxHash";
 
 sub menu
 {
-	while (my @menu = each %list)
+	foreach my $name (sort keys %list)
 	{
-		print "$menu[0] = $menu[1]\n"
+		print "$name: $list{$name}\n";
 	}
 	print "==========================\n";
 	print "Select the menu item: ";
@@ -158,3 +154,5 @@ sub st21
 		$choice = menu();
 	}
 }
+
+return 1;
