@@ -1,10 +1,7 @@
 package ST05;
-
 use strict;
 
-main ();
-
-sub main
+sub st05
 {
        
         print "Choose menu item\n";
@@ -164,3 +161,4 @@ sub SaveToFile
                 print "\nThe list can not be saved!\n";
         }
 }
+return 1;
