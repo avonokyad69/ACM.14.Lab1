@@ -46,11 +46,11 @@ sub menu{
 sub st12{
 	while(1){
 		my $ch = menu();
+		if ($ch==@NAMES-1){return;}
 		if($ch>=0&&defined $MODULES[$ch]){
 			$MODULES[$ch]->();
 		}
 		else{
-			return;
 			system("cls");
 			print "Внимательнее!";
 			next;
