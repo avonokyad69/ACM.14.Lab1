@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
+binmode(STDOUT,':encoding(cp866):bytes');
 use st01::st01;
 use st02::st02;
 use st08::st08;
@@ -9,6 +10,7 @@ use st13::st13;
 use st12::st12;
 use st15::st15;
 use st16::st16;
+use st17::st17;
 use st21::st21;
 use st22::st22;
 
@@ -22,6 +24,7 @@ my @MODULES =
 	\&ST13::st13,
 	\&ST15::st15,
 	\&ST16::st16,
+	\&ST17::st17,
 	\&ST21::st21,
 	\&ST22::st22,
 );
@@ -36,6 +39,7 @@ my @NAMES =
 	"13. Mansurov",
 	"15. Pridachin",
 	"16. Samokhin",
+	"17. Tikhonov R.",
 	"21. Shilenkov",
 	"22. ShishkinaViktoria"
 );
