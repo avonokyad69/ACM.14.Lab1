@@ -33,6 +33,7 @@ my @MODULES =
 	\&ST16::st16,
 	\&ST17::st17,
 	\&ST18::st18,
+	\&ST19::st19,
 	\&ST21::st21,
 	\&ST22::st22,
 );
@@ -52,6 +53,7 @@ my @NAMES =
 	"16. Samokhin",
 	"17. Tikhonov R.",
 	"18. Chaldina",
+	"19. Cherepanov",
 	"21. Shilenkov",
 	"22. ShishkinaViktoria"
 );
