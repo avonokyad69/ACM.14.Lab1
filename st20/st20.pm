@@ -15,7 +15,7 @@ my @MYMENU =
 
 my @MENU =
 (
-	"*new*",
+	"*add*",
 	"*edit*",
 	"*show*",
 	"*save to file*",
@@ -26,7 +26,7 @@ my @MENU =
 
 sub st20
 {
-	print "______my lab1_____ ";
+	print "______my lab1_____ :]";
 	while(1)
 	{
 		my $ct = menu();
@@ -59,22 +59,22 @@ sub menu
 
 sub Add
 {
-	print "Enter region:  ";
-	chomp(my $region=<STDIN>);
-	print "Enter departments quantity: ";
+	print "Enter region name:  ";
+	chomp(my $region_name=<STDIN>);
+	print "Enter department: ";
 	chomp(my $department=<STDIN>);
-	print "Enter employee quantity: ";
-	chomp(my $employee=<STDIN>);
+	print "Enter employees quantity: ";
+	chomp(my $employees=<STDIN>);
 
 	my $region = {
-		Region => $region,
+		Name => $region_name,
 		Department => $department,
-		Employee => $employee,
+		Employees => $employees,
 	};
 
 	push(@regions,$region);
 
-	print "\nregion ".$region." added\n";
+	print "\nRegion ".$region_name." added\n";
 	return 1;
 };
 
@@ -82,7 +82,7 @@ sub Edit
 {
 	if (Show()) 
 	{
-		print "\nWrite region to change: \n";
+		print "\nWrite id region to change: \n";
 		chomp(my $el=<STDIN>);
 		if (@regions[$el]) {
 			my $hashref = @regions[$el];
@@ -91,7 +91,7 @@ sub Edit
 				chomp(my $hash=<STDIN>);
 				$hashref->{$key}=$hash;
 			}
-			print "\nregion #$el edited\n";
+			print "\nRegion #$el edited\n";
 		} else {
 			print "\nWrong id\n";
 		}
@@ -149,7 +149,7 @@ sub Delete
 		chomp (my $el=<STDIN>);
 		if (@regions[$el]) {
 			splice(@regions, $el, 1);
-			print "\nregion #".$el." deleted\n";
+			print "\nRegion #".$el." deleted\n";
 			return 1;
 		} else
 		{
